@@ -1,7 +1,7 @@
 import os
 
 from PIL import Image
-from plot_helpers import imshow
+# from plot_helpers import imshow
 from torch.utils.data import Dataset, DataLoader
 
 class SIGNSData (Dataset):

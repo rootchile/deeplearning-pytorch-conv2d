@@ -10,6 +10,8 @@ from train_data import SIGNSData
 from train_red import Net
 from train_logging import RunningMetric
 
+import time
+
 train_data =  SIGNSData(base_dir='./datasets/64x64_SIGNS', 
                         split="train",
                         transform=transforms.ToTensor()
@@ -37,6 +39,7 @@ optimizer = optim.SGD(net.parameters(), lr= 1e-3, momentum =0.9)
 num_epochs = 100 # pasadas por el dataset completo
 
 for epoch in range(num_epochs):
+    time_init = time.time()
     print('Epoch {}/{}'.format(epoch+1,num_epochs))
     print('-'*10)
     
@@ -71,5 +74,5 @@ for epoch in range(num_epochs):
         running_acc.update(torch.sum((preds == targets)).float(),
                            batch_size)
         
-        print('Loss {:.4f}, Acc: {:.4f} '.format(running_loss(), running_acc()))
+    print('Loss {:.4f}, Acc: {:.4f} , Time: {} sec.'.format(running_loss(), running_acc(), round(time.time()-time_init,2)))
         
